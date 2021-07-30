@@ -1,6 +1,4 @@
-package LINKED_LIST.LL_easy;
-
-import java.util.Scanner;
+package LL_easy;
 
 /*
 ==================
@@ -23,22 +21,52 @@ space comlexity: O(1)
 public class x5_reverse_linked_list {
 
  public static class ListNode {
-  int val;
+  int data;
   ListNode next;
 
   ListNode() {
   }
 
-  ListNode(int val) {
-   this.val = val;
+  ListNode(int data) {
+   this.data = data;
   }
 
-  ListNode(int val, ListNode next) {
-   this.val = val;
+  ListNode(int data, ListNode next) {
+   this.data = data;
    this.next = next;
   }
  }
 
+ static ListNode head1;
+ static ListNode head2;
+
+ public static void main(String[] args) {
+  head1 = new ListNode(1);
+  head1.next = new ListNode(2);
+  head1.next.next = new ListNode(3);
+  head1.next.next.next = new ListNode(40);
+
+  ListNode ans = reverseList(head1);
+  while (ans != null) {
+   System.out.print(ans.data + " ");
+   ans = ans.next;
+  }
+
+  System.out.println();
+
+  head2 = new ListNode(1);
+  head2.next = new ListNode(2);
+  head2.next.next = new ListNode(3);
+  head2.next.next.next = new ListNode(40);
+
+  ListNode result = reverseListRec(head2);
+  while (result != null) {
+   System.out.print(result.data + " ");
+   result = result.next;
+  }
+ }
+
+ // Iterative version
  public static ListNode reverseList(ListNode head) {
   ListNode c = head;
   ListNode p = null;
@@ -54,21 +82,32 @@ public class x5_reverse_linked_list {
   return head;
  }
 
- public static void main(String[] args) {
-  Scanner s = new Scanner(System.in);
-  int l1 = s.nextInt();
-  ListNode h1 = new ListNode(s.nextInt());
-  ListNode a1 = h1;
-  while (l1 > 0) {
-   a1.next = new ListNode(s.nextInt());
-   a1 = a1.next;
-   l1--;
-  }
-  ListNode value = reverseList(h1);
-  while (value != null) {
-   System.out.println(value.val);
-   value = value.next;
-  }
-  s.close();
+ // Recursive version
+
+ public static ListNode reverseListRec(ListNode head) {
+  if (head == null)
+   return head;
+  ListNode current = head;
+  ListNode prev = null;
+  return Util(current, prev);
  }
+
+ public static ListNode Util(ListNode curr, ListNode prev) {
+  if (curr == null)
+   return curr;
+
+  if (curr.next == null) {
+   head2 = curr;
+   curr.next = prev;
+
+   return head2;
+  }
+
+  ListNode next = curr.next;
+  curr.next = prev;
+
+  Util(next, curr);
+  return head2;
+ }
+
 }

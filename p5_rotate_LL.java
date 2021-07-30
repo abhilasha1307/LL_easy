@@ -1,4 +1,4 @@
-package LINKED_LIST.LL_easy;
+package LL_easy;
 
 //done; see if GFG solution is better in terms of time
 import java.util.Scanner;

@@ -1,18 +1,27 @@
-package LINKED_LIST.LL_easy;
+package LL_easy;
 
-import java.util.Scanner;
 /*
-======================
+==============================================
 PROBLEM:)
-======================
+==============================================
 Given a singly linked list of size N. The task is to swap elements in the linked list pairwise.
-For example, if the input list is 1 2 3 4, the resulting list after swaps will be 2 1 4 3.
- */
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+Constraints:
+1 ≤ N ≤ 103
+
+=================================================
+EXAMPLES:
+LinkedList: 1->2->2->4->5->6->7->8
+Output: 2 1 4 2 6 5 8 7
+=================================================
+*/
 
 /*
-============================
-APPROACH: i was swapping values but here we gotta actually swap the nodes with e/o
-============================
+====================================================
+APPROACH: 
+====================================================
 we set up 3 nodes previous(points to head), current(points to head.next) and next(points to current.next)
 
 we will make the next of current node point to the previous node 
@@ -21,34 +30,21 @@ if the next node is the last in LL or null, make prev.next point to next and com
 else make prev.next point to next.next(we have to swap the next 2 elements too)
 now shift the prev node to next and current to next.next
 
-time complexity:
+time complexity: o(N)
 space complexity: O(1)
 */
 
-/*
-==============================
-my approach and problem with it:
-==============================
-while(n.next!=null&&n!=null){c.next=p;p.next=n.next;c=n.next;p=n;n=n.next;}
+public class p4_pairwiseSwap_elements_inLL extends helper {
 
-if(n!=null){c.next=p;p.next=null;}
+ public static void main(String[] args) {
+  Node head = new Node(1);
+  head.next = new Node(2);
+  head.next.next = new Node(3);
+  head.next.next.next = new Node(4);
+  head.next.next.next.next = new Node(5);
+  head.next.next.next.next.next = new Node(6);
 
-else if(n==null){c.next=p;p.next=n;}return head;
-
-problem with the above approach is that for even and odd number of nodes it has to be coded differently .
-we have to also unlink the internal nodes from inside to prevent the formation of infinite loop between nodes
-this is tricky and sometimes gives unexpected results 
-*/
-
-public class p4_pairwiseSwap_elements_inLL {
- static class Node {
-  int data;
-  Node next;
-
-  Node(int x) {
-   data = x;
-   next = null;
-  }
+  printlist(pairwiseSwap(head));
  }
 
  public static Node pairwiseSwap(Node head) {
@@ -84,24 +80,5 @@ public class p4_pairwiseSwap_elements_inLL {
    t = t.next;
   }
   System.out.println("\n");
- }
-
- public static void main(String[] args) {
-  Scanner s = new Scanner(System.in);
-  int t = s.nextInt();
-  while (t > 0) {
-   int n = s.nextInt();
-   Node head = new Node(s.nextInt());
-   Node temp = head;
-   while (n-- > 0) {
-    temp.next = new Node(s.nextInt());
-    temp = temp.next;
-   }
-   Node sol = pairwiseSwap(head);
-   printlist(sol);
-   t--;
-  }
-
-  s.close();
  }
 }

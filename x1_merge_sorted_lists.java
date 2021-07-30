@@ -1,7 +1,4 @@
-// done
-package LINKED_LIST.LL_easy;
-
-import java.util.Scanner;
+package LL_easy;
 
 /* 
 =================
@@ -31,99 +28,83 @@ time Complexity: O(m+n) m and n are number of elements in both lists
 
 space complexity: O(m+n) : new list will contain elements of both given lists combined
 */
-public class x1_merge_sorted_lists {
-  public static class Node {
-    int data;
-    Node next;
 
-    Node() {
-    }
-
-    Node(int d) {
-      data = d;
-      next = null;
-    }
+/*
+==================================================================
+ALTERNATE APPROACH: Time : O(m+n), Space: O(1)
+====================================================================
+public static Node sortedMerge(Node A, Node B)
+{
+  if(A == null)
+  {
+    return B;
+  }
+  if(B == null)
+  {
+    return A;
   }
 
-  public static Node mergeTwoLists(Node l1, Node l2) {
-    Node s1 = l1;
-    Node s2 = l2;
-    if (s1 == null && s2 == null) {
-      return s1;
-    }
-
-    if (s1 == null) {
-      return s2;
-    }
-    if (s2 == null) {
-      return s1;
-    }
-
-    Node l3;
-    if (s1.data <= s2.data) {
-      l3 = new Node(s1.data);
-      s1 = s1.next;
-    } else {
-      l3 = new Node(s2.data);
-      s2 = s2.next;
-    }
-
-    Node ptrNode = l3;
-
-    while (s1 != null && s2 != null) {
-      if (s1.data <= s2.data) {
-        Node temp = new Node(s1.data);
-        ptrNode.next = temp;
-        ptrNode = temp;
-        s1 = s1.next;
-      } else {
-        Node temp = new Node(s2.data);
-        ptrNode.next = temp;
-        ptrNode = temp;
-        s2 = s2.next;
-      }
-    }
-    while (s1 != null) {
-      Node temp = new Node(s1.data);
-      ptrNode.next = temp;
-      ptrNode = temp;
-      s1 = s1.next;
-    }
-    while (s2 != null) {
-      Node temp = new Node(s2.data);
-      ptrNode.next = temp;
-      ptrNode = temp;
-      s2 = s2.next;
-    }
-    return l3;
+  if(A.data<B.data)
+  {
+    A.next = sortedMerge(A.next, B);
+    return A;
   }
+  else
+  {
+    B.next = sortedMerge(A, B.next);
+    return B:
+  }
+
+}
+*/
+public class x1_merge_sorted_lists extends helper {
 
   public static void main(String[] args) {
-    Scanner s = new Scanner(System.in);
-    int l1 = s.nextInt();
-    int l2 = s.nextInt();
-    int x = l1 + l2;
-    Node h1 = new Node(s.nextInt());
-    Node a1 = h1;
-    Node h2 = new Node(s.nextInt());
-    Node a2 = h2;
-    while (l1 > 0) {
-      a1.next = new Node(s.nextInt());
-      a1 = a1.next;
+    Node A = new Node(5);
+    A.next = new Node(10);
+    A.next.next = new Node(15);
+    A.next.next.next = new Node(40);
 
-      l1--;
+    Node B = new Node(2);
+    B.next = new Node(3);
+    B.next.next = new Node(20);
+
+    Node res = mergeTwoLists(A, B);
+    while (res != null) {
+      System.out.print(res.data + " ");
+      res = res.next;
     }
-    while (l2 > 0) {
-      a2.next = new Node(s.nextInt());
-      a2 = a2.next;
-      l2--;
+  }
+
+  public static Node mergeTwoLists(Node A, Node B) {
+    Node result = new Node(0);
+    Node tail = result;
+
+    while (true) {
+      if (A == null) {
+        tail.next = B;
+        break;
+      }
+
+      if (B == null) {
+        tail.next = A;
+        break;
+      }
+
+      if (A.data <= B.data) {
+        tail.next = A;
+        A = A.next;
+      }
+
+      else {
+        tail.next = B;
+        B = B.next;
+      }
+
+      tail = tail.next;
     }
-    Node sol = mergeTwoLists(h1, h2);
-    while (x-- > 0) {
-      System.out.println(sol.data + " ");
-      sol = sol.next;
-    }
-    s.close();
+
+    return result.next;
   }
 
 }

@@ -1,8 +1,7 @@
-package LINKED_LIST.LL_easy;
+package LL_easy;
 
 //done
 //look for better solutions
-import java.util.Scanner;
 /*
 ==================
 PROBLEM:)
@@ -31,39 +30,23 @@ time: O(n) //check
 space: O(1)
 */
 
-public class x7_palindrome_LL {
- public static class ListNode {
-  int val;
-  ListNode next;
+public class x7_palindrome_LL extends helper {
 
-  ListNode() {
-  }
-
-  ListNode(int val) {
-   this.val = val;
-  }
-
-  ListNode(int val, ListNode next) {
-   this.val = val;
-   this.next = next;
-  }
- }
-
- public static boolean isPalindrome(ListNode head) {
+ public static boolean isPalindrome(Node head) {
 
   if (head == null) {
    return false;
   }
 
-  ListNode mid = middleNode(head);
-  ListNode second = reverse(mid.next);
+  Node mid = middleNode(head);
+  Node second = reverse(mid.next);
   mid.next = second; // to bring second to mid.next again
 
-  ListNode t1 = head;
-  ListNode t2 = second;
+  Node t1 = head;
+  Node t2 = second;
 
   while (t1 != second && t2 != null) {
-   if (t1.val != t2.val) {
+   if (t1.data != t2.data) {
     return false;
    }
    t1 = t1.next;
@@ -73,9 +56,9 @@ public class x7_palindrome_LL {
   return true;
  }
 
- static ListNode middleNode(ListNode head) {
-  ListNode slow = head;
-  ListNode fast = head;
+ static Node middleNode(Node head) {
+  Node slow = head;
+  Node fast = head;
   while (fast.next != null && fast.next.next != null) {
    slow = slow.next;
    fast = fast.next.next;
@@ -84,10 +67,10 @@ public class x7_palindrome_LL {
   return slow;
  }
 
- static ListNode reverse(ListNode head) {
-  ListNode c = head;
-  ListNode p = null;
-  ListNode n = null;
+ static Node reverse(Node head) {
+  Node c = head;
+  Node p = null;
+  Node n = null;
 
   while (c != null) {
    n = c.next;
@@ -101,17 +84,11 @@ public class x7_palindrome_LL {
  }
 
  public static void main(String[] args) {
-  Scanner s = new Scanner(System.in);
-  int l1 = s.nextInt();
-  ListNode h1 = new ListNode(s.nextInt());
-  ListNode a1 = h1;
-  while (l1 > 0) {
-   a1.next = new ListNode(s.nextInt());
-   a1 = a1.next;
-   l1--;
-  }
-  boolean value = isPalindrome(h1);
-  System.out.println(value);
-  s.close();
+  Node head = new Node(1);
+  head.next = new Node(2);
+  head.next.next = new Node(1);
+
+  System.out.println(isPalindrome(head));
+
  }
 }

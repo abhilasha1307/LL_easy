@@ -1,4 +1,4 @@
-package LINKED_LIST.LL_easy;
+package LL_easy;
 
 //done; explain ur and alternative approach
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package LINKED_LIST.LL_easy;
+package LL_easy;
 
 import java.util.*;
 /*

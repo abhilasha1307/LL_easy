@@ -1,4 +1,4 @@
-package LINKED_LIST.LL_easy;
+package LL_easy;
 
 //new concept of concatenation and string.charat() function 
 import java.util.Scanner;

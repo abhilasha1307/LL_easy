@@ -1,4 +1,4 @@
-package LINKED_LIST.LL_easy;
+package LL_easy;
 
 //done (submission problem)
 import java.util.Scanner;
